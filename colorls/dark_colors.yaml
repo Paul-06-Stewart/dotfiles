@@ -1,0 +1,46 @@
+# Main Colors (Catppuccin-inspired)
+unrecognized_file: "#f5c2e7" # pink
+recognized_file:   "#f5e0dc" # rosewater
+executable_file:   "#a6e3a1" # green
+dir:               "#89b4fa" # blue
+
+# Link
+dead_link: "#f38ba8" # red
+link:      "#94e2d5" # teal
+
+# special files
+socket:   "#cba6f7" # mauve
+blockdev: "#fab387" # peach
+chardev:  "#f9e2af" # yellow
+
+# Access Modes
+write:     "#fab387"
+read:      "#a6e3a1"
+exec:      "#f38ba8"
+no_access: "#eba0ac"
+
+# Age
+day_old:     "#94e2d5"
+hour_old:    "#89b4fa"
+no_modifier: "#b4befe"
+
+# File Size
+file_large:  "#f38ba8"
+file_medium: "#fab387"
+file_small:  "#f9e2af"
+
+# Random / UI
+report: "#cdd6f4"
+user:   "#f2cdcd"
+tree:   "#94e2d5"
+empty:  "#89b4fa"
+error:  "#f38ba8"
+normal: "#a6adc8"
+inode:  "#f2cdcd"
+
+# Git
+addition:     "#a6e3a1"
+modification: "#fab387"
+deletion:     "#f38ba8"
+untracked:    "#f5c2e7"
+unchanged:    "#94e2d5"

@@ -1,0 +1,45 @@
+# Spotify Player Configuration (Reset to Defaults)
+
+# Theme - try these: default, dracula, tokyonight, gruvbox_dark, catppuccin_mocha
+theme = "default2"
+
+# Client settings
+client_port = 8080
+login_redirect_uri = "http://127.0.0.1:8989/login"
+client_id = "3be800d6f3034093bf04f4728406f499"
+
+# Cover image settings
+cover_img_length = 15
+cover_img_width = 6
+cover_img_scale = 1.0
+enable_cover_image_cache = true
+
+# Playback settings
+default_device = "Pauls Macbook Pro"
+enable_streaming = "Never"
+enable_notify = true
+notify_timeout_in_secs = 0
+
+# Sync settings - poll Spotify API to keep instances in sync
+# playback_refresh_duration_in_ms: polls Spotify API for actual playback state (track, position, play/pause)
+playback_refresh_duration_in_ms = 500
+
+# UI settings
+border_type = "Plain"
+progress_bar_type = "Rectangle"
+playback_format = "{status} {track} • {artists}\n{album}\n{metadata}"
+
+# Device configuration
+[device]
+name = "spotify-player"
+device_type = "speaker"
+volume = 70
+bitrate = 320
+audio_cache = true
+normalization = false
+autoplay = true
+
+# Notification format
+[notify_format]
+summary = "{track} • {artists}"
+body = "{album}"
