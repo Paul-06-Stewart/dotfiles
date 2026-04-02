@@ -23,7 +23,7 @@ fi
 # alias claude='env -u YOUR_KEY_VAR claude'
 
 # GVM disabled - breaks Claude Code shell snapshots (cd function gets captured without helper functions)
-# [[ -s "/Users/paulstewart/.gvm/scripts/gvm" ]] && source "/Users/paulstewart/.gvm/scripts/gvm"
+# [[ -s "$HOME/.gvm/scripts/gvm" ]] && source "$HOME/.gvm/scripts/gvm"
 # [[ -s "$HOME/.gvm/scripts/gvm" ]] && source "$HOME/.gvm/scripts/gvm"
 
 export PATH="$HOME/.gem/ruby/2.6.0/bin:$PATH"
@@ -68,18 +68,14 @@ spotify_2() {
         echo "Already 3 spotify_player instances running. Close one first or run: pkill -f spotify_player"
         return 1
     fi
-    /Users/paulstewart/bin/spotify_player
+    $HOME/bin/spotify_player
 }
 
-# Doghouse Memory System
-export DOGHOUSE_USER_ID="paul_stewart"
-export DOGHOUSE_USER_NAME="Paul Stewart"
-export DOGHOUSE_ORG="dane"
-
-# Doghouse location for Claude skills/commands/agents
-
-# Doghouse
-export DOGHOUSE_HOME="/Users/paulstewart/doghouse"
+# Doghouse Memory System (update with your own info)
+# export DOGHOUSE_USER_ID="your_id"
+# export DOGHOUSE_USER_NAME="Your Name"
+# export DOGHOUSE_ORG="your_org"
+# export DOGHOUSE_HOME="$HOME/doghouse"
 
 # Interactive completion menu (tab twice to browse with arrows)
 zstyle ':completion:*' menu select
@@ -114,7 +110,7 @@ source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 [[ -f ~/.secrets ]] && source ~/.secrets
 
 # bun completions
-[ -s "/Users/paulstewart/.bun/_bun" ] && source "/Users/paulstewart/.bun/_bun"
+[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
 
 # bun
 export BUN_INSTALL="$HOME/.bun"

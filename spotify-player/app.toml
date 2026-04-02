@@ -15,7 +15,7 @@ cover_img_scale = 1.0
 enable_cover_image_cache = true
 
 # Playback settings
-default_device = "Pauls Macbook Pro"
+# default_device = "Your Device Name"
 enable_streaming = "Never"
 enable_notify = true
 notify_timeout_in_secs = 0
