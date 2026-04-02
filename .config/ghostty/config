@@ -1,0 +1,6 @@
+term = xterm-256color
+clipboard-paste-protection = false
+font-family = CaskaydiaCove Nerd Font Mono
+font-style = ExtraLight
+font-style-bold = Regular
+font-thicken = false
