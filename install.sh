@@ -1,50 +1,57 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-DOTFILES_DIR="$(cd "$(dirname "$0")" && pwd)"
+echo "=== Terminal Setup ==="
+echo ""
 
-# Files to symlink into $HOME
-FILES=(
-  .zshrc
-  .p10k.zsh
-  .dircolors
-  .fzf.zsh
-)
+# Check for Homebrew
+if ! command -v brew &>/dev/null; then
+  echo "Installing Homebrew..."
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+fi
 
-# Config dirs to symlink into ~/.config/
-CONFIG_DIRS=(
-  ghostty
-)
+echo "Installing dependencies via Homebrew..."
+brew install \
+  zsh-autosuggestions \
+  zsh-syntax-highlighting \
+  ruby \
+  fzf \
+  thefuck \
+  direnv \
+  zoxide \
+  pyenv \
+  nvm
 
-echo "Installing dotfiles from $DOTFILES_DIR"
+# colorls is a Ruby gem
+echo "Installing colorls..."
+gem install colorls
 
-for file in "${FILES[@]}"; do
-  target="$HOME/$file"
-  source="$DOTFILES_DIR/$file"
-  if [[ -e "$target" && ! -L "$target" ]]; then
-    echo "  Backing up existing $target -> ${target}.bak"
-    mv "$target" "${target}.bak"
-  fi
-  ln -sfn "$source" "$target"
-  echo "  Linked $target -> $source"
-done
+# Powerlevel10k
+if [[ ! -d "$HOME/.powerlevel10k" ]]; then
+  echo "Installing Powerlevel10k..."
+  git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/.powerlevel10k
+else
+  echo "Powerlevel10k already installed."
+fi
 
-mkdir -p "$HOME/.config"
-for dir in "${CONFIG_DIRS[@]}"; do
-  target="$HOME/.config/$dir"
-  source="$DOTFILES_DIR/.config/$dir"
-  if [[ -e "$target" && ! -L "$target" ]]; then
-    echo "  Backing up existing $target -> ${target}.bak"
-    mv "$target" "${target}.bak"
-  fi
-  ln -sfn "$source" "$target"
-  echo "  Linked $target -> $source"
-done
+# Nerd Font
+echo ""
+echo "Installing CaskaydiaCove Nerd Font..."
+brew install --cask font-caskaydia-cove-nerd-font 2>/dev/null || echo "  (font may already be installed)"
 
 echo ""
-echo "Done! Dependencies to install:"
-echo "  brew install powerlevel10k zsh-autosuggestions zsh-syntax-highlighting"
-echo "  brew install colorls zoxide fzf thefuck direnv pyenv nvm"
-echo "  git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/.powerlevel10k"
+echo "=== Dependencies installed! ==="
 echo ""
-echo "Then restart your shell or run: source ~/.zshrc"
+echo "Next steps:"
+echo "  1. Copy configs into place (or cherry-pick what you want):"
+echo "     cp zsh/.zshrc ~/.zshrc"
+echo "     cp zsh/.p10k.zsh ~/.p10k.zsh"
+echo "     cp zsh/.fzf.zsh ~/.fzf.zsh"
+echo "     cp zsh/.dircolors ~/.dircolors"
+echo "     mkdir -p ~/.config/ghostty && cp ghostty/config ~/.config/ghostty/config"
+echo ""
+echo "  2. Create a ~/.secrets file for API keys:"
+echo "     touch ~/.secrets && chmod 600 ~/.secrets"
+echo ""
+echo "  3. Restart your shell or run: source ~/.zshrc"
