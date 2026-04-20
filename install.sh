@@ -15,6 +15,7 @@ echo "Installing dependencies via Homebrew..."
 brew install \
   zsh-autosuggestions \
   zsh-syntax-highlighting \
+  coreutils \
   ruby \
   fzf \
   thefuck \

@@ -26,7 +26,7 @@ fi
 # [[ -s "$HOME/.gvm/scripts/gvm" ]] && source "$HOME/.gvm/scripts/gvm"
 # [[ -s "$HOME/.gvm/scripts/gvm" ]] && source "$HOME/.gvm/scripts/gvm"
 
-export PATH="$HOME/.gem/ruby/2.6.0/bin:$PATH"
+for d in $HOME/.gem/ruby/*/bin; do [[ -d "$d" ]] && export PATH="$d:$PATH"; done
 if [[ -f "$HOME/.dircolors" ]]; then
   eval "$(gdircolors -b "$HOME/.dircolors")"
 fi
