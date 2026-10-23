@@ -1,0 +1,12 @@
+{
+  "lunarvim": "d15c8d77d4d3c9f3843c73b3d57ad6f4e2415f76",
+  "powerlevel10k": "36f3045d69d1ba402db09d09eb12b42eebe0fa3b",
+  "tpm": "99469c4a9b1ccf77fade25842dc7bafbc8ce9946",
+  "neovim": "0.11.5",
+  "neovim_sha256": {
+    "arm64": "79143d3b408f7034f90b7cf59af2276de09ef8a4c2f1a28e4c99581b249d3107",
+    "x86_64": "6612760a7037ca2518e456908baf5e43101fa79819d18979fc4d4e8441d9dfa5"
+  },
+  "tmux-sensible": "25cb91f42d020f675bb0a2ce3fbd3a5d96119efa",
+  "tmux-resurrect": "cff343cf9e81983d3da0c8562b01616f12e8d548"
+}

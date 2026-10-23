@@ -1,6 +1,59 @@
+# ── Ghostty — single source of truth ────────────────────────
+# NOTE: macOS Ghostty loads BOTH this file and ~/.config/ghostty/config,
+# and THIS file (Application Support) wins on conflicts. Everything lives
+# here so the config is deterministic. ~/.config/ghostty/config is a pointer.
+
+# ── Terminal ────────────────────────────────────────────────
 term = xterm-256color
 clipboard-paste-protection = false
-font-family = CaskaydiaCove Nerd Font Mono
-font-style = ExtraLight
-font-style-bold = Regular
+
+# ── Theme (muted pastel) ────────────────────────────────────
+# Claude Code runs `theme = dark-ansi`, so it inherits these 16
+# ANSI colors — this line reskins the terminal AND Claude Code.
+# One-line swaps:
+#   theme = Rose Pine Moon        # dustier, more desaturated
+#   theme = Catppuccin Macchiato  # softer contrast
+#   theme = Rose Pine             # deepest of the rose variants
+# Follows macOS light/dark automatically (dark → Mocha, light → Soft Latte).
+# Soft Latte keeps Catppuccin's accents but maps ANSI black backgrounds to a
+# gentle gray and ANSI white text to charcoal for light-mode terminal apps.
+# For a single fixed theme instead, use e.g.: theme = Catppuccin Mocha
+theme = dark:Catppuccin Mocha,light:Soft Latte
+
+# ── Font ────────────────────────────────────────────────────
+# Was: CaskaydiaCove Nerd Font Mono (ExtraLight in XDG / Bold here — conflicting)
+# Swap-kit — change the one active line below:
+#   font-family = MonaspiceNe Nerd Font Mono   # ligatures + texture healing
+#   font-family = MonaspiceAr Nerd Font Mono   # humanist, flagship Monaspace
+#   font-family = VictorMono Nerd Font Mono    # cursive italics for comments
+#   font-family = GeistMono Nerd Font Mono     # geometric, clean
+#   font-family = 0xProto Nerd Font Mono       # crisp, wide, great for pastel
+font-family = CommitMono Nerd Font Mono
+font-style = Regular
+font-style-bold = Bold
 font-thicken = false
+font-synthetic-style = true
+
+# Readability: breathing room between lines and a touch on the sides
+adjust-cell-height = 20%
+adjust-cell-width = 2%
+# Keep fixed application colors (including colorls pastels) readable in light/dark mode.
+minimum-contrast = 4.5
+
+# ── Atmosphere ──────────────────────────────────────────────
+# Subtle translucency + blur. Set opacity to 1.0 to make it solid.
+background-opacity = 0.95
+background-blur-radius = 20
+cursor-style = bar
+cursor-style-blink = true
+macos-titlebar-style = transparent
+window-padding-x = 14
+window-padding-y = 10
+window-padding-balance = true
+unfocused-split-opacity = 0.85
+mouse-hide-while-typing = true
+
+# ── Behavior (preserved from your existing config) ──────────
+window-save-state = always
+window-new-tab-position = end
+keybind = shift+enter=text:\x1b\r

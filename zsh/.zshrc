@@ -1,93 +1,46 @@
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
-
+# Also works for interactive shells that are not login shells.
+if [[ -z "${HOMEBREW_PREFIX:-}" ]]; then
+  for brew_bin in /opt/homebrew/bin/brew /usr/local/bin/brew; do
+    if [[ -x "$brew_bin" ]]; then
+      eval "$("$brew_bin" shellenv)"
+      break
+    fi
+  done
+fi
+typeset -U path
+path=("$HOME/.local/bin" "$HOME/bin" "$HOME/.cargo/bin" "$HOME/.bun/bin" $path)
+if [[ -n "${HOMEBREW_PREFIX:-}" ]]; then
+  path=("$HOMEBREW_PREFIX/opt/ruby/bin" $path)
+  gem_bins=("$HOMEBREW_PREFIX"/lib/ruby/gems/*/bin(N))
+  path=($gem_bins $path)
+fi
+export GEM_HOME="$HOME/.local/share/gem"
+path=("$GEM_HOME/bin" $path)
+if [[ -d "${HOMEBREW_PREFIX:-}/opt/openjdk@21/libexec/openjdk.jdk/Contents/Home" ]]; then
+  export JAVA_HOME="$HOMEBREW_PREFIX/opt/openjdk@21/libexec/openjdk.jdk/Contents/Home"
+  path=("$JAVA_HOME/bin" $path)
+fi
 export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-
-export TMPDIR="$HOME/tmp"
-mkdir -p "$TMPDIR"
-export PATH="/opt/homebrew/bin:/opt/homebrew/sbin:$PATH"
-export PYENV_ROOT="$HOME/.pyenv"
-if [[ -d "$PYENV_ROOT" ]]; then
-  export PATH="$PYENV_ROOT/bin:$PATH"
+if [[ -s "$NVM_DIR/nvm.sh" ]]; then
+  source "$NVM_DIR/nvm.sh"
+elif [[ -n "${HOMEBREW_PREFIX:-}" && -s "$HOMEBREW_PREFIX/opt/nvm/nvm.sh" ]]; then
+  source "$HOMEBREW_PREFIX/opt/nvm/nvm.sh"
 fi
-if command -v pyenv >/dev/null 2>&1; then
-  eval "$(pyenv init -)"
-fi
-
-# Claude (unset any stale API key env var before launching)
-# alias claude='env -u YOUR_KEY_VAR claude'
-
-# GVM disabled - breaks Claude Code shell snapshots (cd function gets captured without helper functions)
-# [[ -s "$HOME/.gvm/scripts/gvm" ]] && source "$HOME/.gvm/scripts/gvm"
-# [[ -s "$HOME/.gvm/scripts/gvm" ]] && source "$HOME/.gvm/scripts/gvm"
-
-for d in $HOME/.gem/ruby/*/bin; do [[ -d "$d" ]] && export PATH="$d:$PATH"; done
-if [[ -f "$HOME/.dircolors" ]]; then
-  eval "$(gdircolors -b "$HOME/.dircolors")"
-fi
-alias ls='colorls'
-
-if command -v direnv >/dev/null 2>&1; then
-  eval "$(direnv hook zsh)"
-fi
-
-if command -v zoxide >/dev/null 2>&1; then
-  eval "$(zoxide init zsh)"
-fi
-
-if [[ -r "$HOME/.powerlevel10k/powerlevel10k.zsh-theme" ]]; then
-  source "$HOME/.powerlevel10k/powerlevel10k.zsh-theme"
-fi
-[[ -r "$HOME/.p10k.zsh" ]] && source "$HOME/.p10k.zsh"
-
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-export PATH="$HOME/.local/bin:$PATH"
-export PATH="$HOME/bin:$PATH"
-
-# Spotify player functions (max 3 instances)
-spotify() {
-    local count=$(pgrep -f spotify_player | wc -l)
-    if [ $count -ge 3 ]; then
-        echo "Already 3 spotify_player instances running. Close one first or run: pkill -f spotify_player"
-        return 1
-    fi
-    ~/.cargo/bin/spotify_player
-}
-
-spotify_2() {
-    local count=$(pgrep -f spotify_player | wc -l)
-    if [ $count -ge 3 ]; then
-        echo "Already 3 spotify_player instances running. Close one first or run: pkill -f spotify_player"
-        return 1
-    fi
-    $HOME/bin/spotify_player
-}
-
-# Doghouse Memory System (update with your own info)
-# export DOGHOUSE_USER_ID="your_id"
-# export DOGHOUSE_USER_NAME="Your Name"
-# export DOGHOUSE_ORG="your_org"
-# export DOGHOUSE_HOME="$HOME/doghouse"
-
-# Interactive completion menu (tab twice to browse with arrows)
-zstyle ':completion:*' menu select
+[[ -r "$HOME/.orbstack/shell/init.zsh" ]] && source "$HOME/.orbstack/shell/init.zsh"
+fpath=("$HOME/.zsh/completions" $fpath)
 autoload -Uz compinit && compinit
-
-# Directory navigation shortcuts
-setopt AUTO_CD          # type directory name to cd into it
+zstyle ':completion:*' menu select
+setopt AUTO_CD
+HISTFILE="$HOME/.zsh_history"
+HISTSIZE=100000
+SAVEHIST=100000
+setopt APPEND_HISTORY SHARE_HISTORY HIST_IGNORE_DUPS
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
-
-# Git aliases (oh-my-zsh style)
 alias gst='git status'
 alias gco='git checkout'
 alias gp='git push'
@@ -98,20 +51,35 @@ alias gcm='git commit -m'
 alias gb='git branch'
 alias gd='git diff'
 alias glog='git log --oneline --graph --decorate'
-
-# thefuck
-eval $(thefuck --alias)
-
-# Zsh plugins
-source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
-# API keys (kept out of version control)
-[[ -f ~/.secrets ]] && source ~/.secrets
-
-# bun completions
-[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
-
-# bun
-export BUN_INSTALL="$HOME/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"
+if command -v colorls >/dev/null; then alias ls='colorls'; fi
+if [[ -r "$HOME/.dircolors" ]] && command -v gdircolors >/dev/null; then
+  eval "$(gdircolors -b "$HOME/.dircolors")"
+fi
+command -v direnv >/dev/null && eval "$(direnv hook zsh)"
+command -v zoxide >/dev/null && eval "$(zoxide init zsh)"
+command -v thefuck >/dev/null && eval "$(thefuck --alias)"
+if command -v fzf >/dev/null; then
+  source <(fzf --zsh)
+fi
+[[ -r "$HOME/.powerlevel10k/powerlevel10k.zsh-theme" ]] && source "$HOME/.powerlevel10k/powerlevel10k.zsh-theme"
+[[ -r "$HOME/.p10k.zsh" ]] && source "$HOME/.p10k.zsh"
+spotify() {
+  local count=$(pgrep -fc spotify_player 2>/dev/null || true)
+  if (( ${count:-0} >= 3 )); then
+    print 'Already 3 spotify_player instances running.'
+    return 1
+  fi
+  command spotify_player "$@"
+}
+alias spotify_2='spotify'
+[[ -r "$HOME/.secrets" ]] && source "$HOME/.secrets"
+[[ -r "$HOME/.zshrc.local" ]] && source "$HOME/.zshrc.local"
+# Keep Claude on subscription authentication when older parent processes carry keys.
+unset ANTHROPIC_API_KEY ANTHROPIC_AUTH_TOKEN ANTHROPIC_BASE_URL ANTHROPIC_MODEL
+unset ANTHROPIC_DEFAULT_OPUS_MODEL ANTHROPIC_DEFAULT_SONNET_MODEL ANTHROPIC_DEFAULT_HAIKU_MODEL
+unset CLAUDE_CODE_USE_BEDROCK CLAUDE_CODE_USE_VERTEX CLAUDE_CODE_USE_FOUNDRY
+unset BIFROST_URL BIFROST_API_KEY BF_VK
+for plugin in zsh-autosuggestions zsh-syntax-highlighting; do
+  [[ -r "${HOMEBREW_PREFIX:-}/share/$plugin/$plugin.zsh" ]] && source "$HOMEBREW_PREFIX/share/$plugin/$plugin.zsh"
+done
+true

@@ -1,0 +1,3 @@
+#!/bin/bash
+set -euo pipefail
+exec "$HOME/.local/share/dotfiles/neovim/0.11.5/nvim-macos-$(uname -m)/bin/nvim" "$@"

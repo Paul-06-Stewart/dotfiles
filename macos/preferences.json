@@ -1,0 +1,47 @@
+[
+  {
+    "domain": "NSGlobalDomain",
+    "key": "AppleShowAllExtensions",
+    "value": true
+  },
+  {
+    "domain": "com.apple.dock",
+    "key": "autohide",
+    "value": true
+  },
+  {
+    "domain": "com.apple.dock",
+    "key": "tilesize",
+    "value": 128.0
+  },
+  {
+    "domain": "com.apple.dock",
+    "key": "magnification",
+    "value": false
+  },
+  {
+    "domain": "com.apple.dock",
+    "key": "orientation",
+    "value": "left"
+  },
+  {
+    "domain": "com.apple.dock",
+    "key": "minimize-to-application",
+    "value": true
+  },
+  {
+    "domain": "com.apple.finder",
+    "key": "AppleShowAllFiles",
+    "value": false
+  },
+  {
+    "domain": "com.apple.finder",
+    "key": "ShowPathbar",
+    "value": true
+  },
+  {
+    "domain": "com.apple.finder",
+    "key": "FXPreferredViewStyle",
+    "value": "clmv"
+  }
+]

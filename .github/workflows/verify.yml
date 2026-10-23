@@ -1,0 +1,9 @@
+name: Verify dotfiles
+on: [push, pull_request]
+jobs:
+  verify:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: brew install shellcheck gitleaks
+      - run: ./scripts/verify.sh

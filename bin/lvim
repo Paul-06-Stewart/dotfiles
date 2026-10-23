@@ -1,0 +1,8 @@
+#!/bin/bash
+set -euo pipefail
+export NVIM_APPNAME=lvim
+export LUNARVIM_RUNTIME_DIR="${LUNARVIM_RUNTIME_DIR:-$HOME/.local/share/lunarvim}"
+export LUNARVIM_CONFIG_DIR="${LUNARVIM_CONFIG_DIR:-$HOME/.config/lvim}"
+export LUNARVIM_CACHE_DIR="${LUNARVIM_CACHE_DIR:-$HOME/.cache/lvim}"
+export LUNARVIM_BASE_DIR="$HOME/.local/share/dotfiles/lunarvim/d15c8d77d4d3c9f3843c73b3d57ad6f4e2415f76"
+exec "$HOME/.local/bin/nvim" -u "$HOME/.local/share/dotfiles/lvim-entry.lua" "$@"

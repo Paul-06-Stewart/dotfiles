@@ -1,0 +1,83 @@
+.Karabiner-VirtualHIDDevice-Manager.app
+.old.Oneleet.app
+A Better Finder Attributes 7.app
+Akko Cloud Driver.app
+Alcove.app
+Amphetamine.app
+Apple Configurator.app
+Aside.app
+CMake.app
+Caffeine.app
+Calendar for Google Calendar.app
+ChatGPT.app
+Class.app
+Claude.app
+Close.io.app
+Comet.app
+CopyClip.app
+CurseForge.app
+Cursor.app
+Discord.app
+Docker.app
+Doghouse.app
+Figma.app
+Firefox.app
+GarageBand.app
+Ghostty.app
+GitHub Desktop.app
+GitKraken.app
+Google Chrome.app
+Google Docs.app
+Google Sheets.app
+Google Slides.app
+Granola.app
+Grok Bot.app
+Keynote.app
+LM Studio.app
+League of Legends.app
+Linear.app
+Loom.app
+Microsoft Defender Shim.app
+Microsoft Excel.app
+Microsoft OneNote.app
+Microsoft Outlook.app
+Microsoft PowerPoint.app
+Microsoft Word.app
+Notion Calendar.app
+Notion Web Clipper.app
+Notion.app
+Numbers.app
+OBS.app
+Obsidian.app
+OneDrive.app
+Oneleet.app
+OrbStack.app
+Pages.app
+Postman Interceptor.app
+Postman.app
+Raycast.app
+Rectangle.app
+Riot Client.app
+Roblox.app
+Safari.app
+Slack.app
+SonyHeadphonesClient.app
+Spotify.app
+Steam.app
+Tailscale.app
+Teamfight Tactics (PBE).app
+Telegram.app
+UHK Agent.app
+WhatsApp.app
+Willow Voice.app
+Windows App.app
+Wispr Flow.app
+Xcode.app
+Zed Nightly 2.app
+checkra1n.app
+iMyFone AnyTo.app
+jbrk.app
+jcon.app
+jqt.app
+lghub.app
+zoom.us.app
