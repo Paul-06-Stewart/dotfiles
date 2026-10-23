@@ -98,6 +98,8 @@ def configs(installer, karabiner=False):
     }
     if karabiner:
         files['karabiner/karabiner.json'] = '.config/karabiner/karabiner.json'
+    for relative in ('lua/config/lazy.lua', 'lua/config/options.lua', 'lua/config/keymaps.lua', 'lua/config/autocmds.lua', 'lua/plugins/init.lua', 'lazyvim.json', 'stylua.toml'):
+        files['nvim/' + relative] = '.config/nvim/' + relative
     for source, target in files.items():
         installer.copy(ROOT / source, target)
     for binary in ('lvim', 'nvim'):
@@ -166,6 +168,7 @@ def runtime():
     env['DOTFILES_EDITOR_SETUP'] = str(ROOT / 'scripts/editor-setup.lua')
     env['DOTFILES_MASON_VERSIONS'] = str(ROOT / 'lvim/mason-versions.json')
     env['JAVA_HOME'] = str(Path(prefix) / 'opt/openjdk@21/libexec/openjdk.jdk/Contents/Home')
+    run(str(HOME / '.local/bin/nvim'), '--headless', '+Lazy! restore', '+qa', env=env)
     run(str(HOME / '.local/bin/lvim'), '--headless', '+Lazy! restore', '+qa', env=env)
     run(str(HOME / '.local/bin/lvim'), '--headless', '-c', 'autocmd VimEnter * lua dofile(vim.env.DOTFILES_EDITOR_SETUP)', env=env)
 

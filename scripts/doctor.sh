@@ -14,6 +14,7 @@ check test -r "$HOME/.config/ghostty/themes/Soft Latte"
 check test -r "$HOME/.powerlevel10k/powerlevel10k.zsh-theme"
 check test -x "$HOME/.tmux/plugins/tpm/tpm"
 check "$HOME/.local/bin/nvim" --version
+check "$HOME/.local/bin/nvim" --headless '+lua local ok,err=pcall(function() assert(require("lazy.core.config").plugins.LazyVim); assert(require("lazyvim.config")); print("Standalone Neovim ready") end); if not ok then io.stderr:write(tostring(err)); vim.cmd("cquit 1") end' +qa
 check "$HOME/.local/bin/lvim" --headless -c 'lua dofile(vim.env.DOTFILES_EDITOR_CHECK)' +qa
 check zsh -n "$HOME/.zshrc"
 check zsh -n "$HOME/.zprofile"

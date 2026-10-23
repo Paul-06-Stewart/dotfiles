@@ -7,6 +7,7 @@ Verified on macOS arm64 with a temporary HOME. The source MacBook's live config 
 - `./install.sh --dry-run --apps --macos` printed the install plan without writes.
 - `scripts/install.py` config installation and `runtime()` completed in an isolated HOME using existing Homebrew dependencies. A repeat runtime installation completed without reinstall prompts.
 - `scripts/doctor.sh` passed with the private overlay applied to that temporary HOME. Neovim 0.11.5 started, LunarVim loaded its theme and native fzf extension, and all 28 parsers and 17 Mason packages were available.
+- Standalone Neovim restored its own locked plugins and loaded the LazyVim configuration modules.
 - An interactive Zsh login loaded the shell config, colorls, LunarVim, and Git aliases.
 - An isolated tmux server confirmed Ctrl+a, mouse support, the transparent status theme, tmux-256color, and aggressive-resize disabled. The test server was stopped afterward.
 - Ghostty's `+validate-config` accepted the packaged configuration.

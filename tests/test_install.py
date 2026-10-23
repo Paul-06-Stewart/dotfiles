@@ -40,6 +40,7 @@ class Installation(unittest.TestCase):
         self.assertEqual((self.home / '.p10k.zsh').read_bytes(), (ROOT / 'zsh/.p10k.zsh').read_bytes())
         self.assertEqual((self.home / '.config/lvim/config.lua').read_bytes(), (ROOT / 'lvim/config.lua').read_bytes())
         self.assertIn('CommitMono', (self.home / 'Library/Application Support/com.mitchellh.ghostty/config').read_text())
+        self.assertTrue((self.home / '.config/nvim/lua/config/lazy.lua').is_file())
         self.assertFalse((self.home / '.config/karabiner').exists())
         before = self.backups()
         self.install()
