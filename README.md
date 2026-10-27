@@ -27,7 +27,7 @@ git config --file ~/.gitconfig.local user.name 'Your Name'
 git config --file ~/.gitconfig.local user.email 'you@example.com'
 ```
 
-After this version is published to `main`, the download entry point is:
+The download entry point is:
 
 ```sh
 curl --proto '=https' --tlsv1.2 -fsSL \

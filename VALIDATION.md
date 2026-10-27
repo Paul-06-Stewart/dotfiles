@@ -15,4 +15,4 @@ Verified on macOS arm64 with a temporary HOME. The source MacBook's live config 
 - Private overlay application preserved existing host blocks. Its SSH definitions resolved devmini, devstudio, and homestudio to the intended addresses.
 
 A wiped Mac, Intel runtime, first-time Homebrew installation, app sign-ins, font rendering, and macOS preference writes have not been tested here.
-The curl entry point becomes available after this change is published to main. The private package is local until a private remote is explicitly created.
+The curl entry point is served from public main. The private overlay is published separately to the private dotfiles-private repository.
